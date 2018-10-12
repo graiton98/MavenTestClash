@@ -1,10 +1,12 @@
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static jdk.nashorn.tools.ShellFunctions.input;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 public class Main{
     public static void main(String[] args) {
         /*JSONParser parser = new JSONParser();
@@ -74,8 +76,8 @@ public class Main{
         } catch (InterruptedException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-        driver.findElement(By.id("email")).sendKeys("daw2glopezmonjo@iesjoanramis.org");
-        driver.findElement(By.id("password")).sendKeys("LopezMonjo356");
+        driver.findElement(By.id("email")).sendKeys("testapiclash@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("Dequa16.");
         driver.findElement(By.className("ladda-button")).click();
         //we.submit();
         try {
@@ -90,24 +92,56 @@ public class Main{
         //password.submit();
         //clan -> 9QJ209UV
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        //WebElement frame = driver.findElement(By.xpath("//*[@id='content']/div/div[2]/div/div/div/div/div/iframe"));
+        //driver.switchTo().frame(driver.findElement(By.xpath("//*[@id='content']/div/div[2]/div/div/div/div/div/iframe")));
+        driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+        List<WebElement> clanBoton = driver.findElements(By.className("toggleEndpointList"));
+        clanBoton.get(0).click();
         
-        //List<WebElement> clanBoton = driver.findElements(By.name("clanTag"));
-        List<WebElement> clanBoton = driver.findElements(By.tagName("input"));
+        List<WebElement> operation = driver.findElements(By.className("toggleOperation"));
+        for(int i = 0; i<operation.size(); i++){
+            WebElement o = operation.get(i);
+            if(o.isDisplayed() && i == 10){
+                o.click();
+            }
+        }
+        List<WebElement> clanTagList = driver.findElements(By.name("clanTag"));
+        clanTagList.get(2).sendKeys("9QJ209UV");
+        
+        List<WebElement> submitButton = driver.findElements(By.className("submit"));
+        for(int i = 0; i<submitButton.size(); i++){
+            WebElement o = submitButton.get(i);
+            if(o.isDisplayed()){
+                System.out.println(o.getAttribute("value"));
+                System.out.println("s'ha trobat un posicio:"+i);
+                new Actions(driver).moveToElement(o).click().perform();
+            }
+        }
+        //driver.findElement(By.name("mclanTag0.24672384947998838")).sendKeys("9QJ209UV");
+        
+        
+        
+        
+        //List<WebElement> clanBoton = driver.findElements(By.className("toggleEndpointList"));
+        //List<WebElement> clanBoton = driver.findElements(By.className("container"));
+        //List<WebElement> clanBoton = driver.findElements(By.tagName("a"));
         //driver.findElement(By.xpath("//a[@class='toggleEndpointList']"));
         //driver.findElement(By.className("toggleEndpointList")).click();
         //List<WebElement> clanBoton = driver.findElements(By.className("toggleOperation"));
         //List<WebElement> clanBoton = driver.findElements(By.xpath("a[@class='toggleEndpointList']"));
-        /*clanBoton.get(0).click();*/
+        //clanBoton.get(0).click();
         //for(WebElement element : clanBoton) element.click();
         /*driver.findElement(By.name("clanTag")).sendKeys("#9QJ209UV");
         driver.findElement(By.className("submit")).click();*/
         //clanBoton.get(3).sendKeys("9QJ209UV");
-        
-        clanBoton.get(0).sendKeys("maamaaaaaaaa");
+        //driver.switchTo().frame(string);
+        //System.out.println(clanBoton.size());
+        //clanBoton.get(0).sendKeys("maamaaaaaaaa");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
