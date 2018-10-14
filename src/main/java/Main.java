@@ -111,37 +111,18 @@ public class Main{
             }
         }
         List<WebElement> clanTagList = driver.findElements(By.name("clanTag"));
-        clanTagList.get(2).sendKeys("9QJ209UV");
+        clanTagList.get(2).sendKeys("#9QJ209UV");
         
         List<WebElement> submitButton = driver.findElements(By.className("submit"));
         for(int i = 0; i<submitButton.size(); i++){
             WebElement o = submitButton.get(i);
             if(o.isDisplayed()){
-                System.out.println(o.getAttribute("value"));
-                System.out.println("s'ha trobat un posicio:"+i);
-                new Actions(driver).moveToElement(o).click().perform();
+                o.submit();
             }
         }
-        //driver.findElement(By.name("mclanTag0.24672384947998838")).sendKeys("9QJ209UV");
-        
-        
-        
-        
-        //List<WebElement> clanBoton = driver.findElements(By.className("toggleEndpointList"));
-        //List<WebElement> clanBoton = driver.findElements(By.className("container"));
-        //List<WebElement> clanBoton = driver.findElements(By.tagName("a"));
-        //driver.findElement(By.xpath("//a[@class='toggleEndpointList']"));
-        //driver.findElement(By.className("toggleEndpointList")).click();
-        //List<WebElement> clanBoton = driver.findElements(By.className("toggleOperation"));
-        //List<WebElement> clanBoton = driver.findElements(By.xpath("a[@class='toggleEndpointList']"));
-        //clanBoton.get(0).click();
-        //for(WebElement element : clanBoton) element.click();
-        /*driver.findElement(By.name("clanTag")).sendKeys("#9QJ209UV");
-        driver.findElement(By.className("submit")).click();*/
-        //clanBoton.get(3).sendKeys("9QJ209UV");
-        //driver.switchTo().frame(string);
-        //System.out.println(clanBoton.size());
-        //clanBoton.get(0).sendKeys("maamaaaaaaaa");
+        driver.get("https://api.clashroyale.com/v1/clans/%239QJ209UV/warlog");
+        String json = driver.findElement(By.tagName("pre")).getText();
+        System.out.println(json);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
